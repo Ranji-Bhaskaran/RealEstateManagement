@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .checkout-container {
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 20px;
+        border-radius: 8px;
+        background-color: #fdfdfd;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+        color: #333;
+        text-align: center;
+    }
+
+    .card {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-title {
+        font-size: 1.8rem;
+        margin-bottom: 15px;
+        color: #333;
+    }
+
+    p {
+        font-size: 1.2rem;
+        line-height: 1.5;
+        color: #555;
+        margin-bottom: 12px;
+    }
+
+    .price,
+    .stamp-duty,
+    .admin-fee,
+    .total-cost {
+        font-weight: bold;
+        font-size: 1.3rem;
+        color: #333;
+        border-bottom: 2px solid #28a745;
+        padding-bottom: 8px;
+    }
+
+    .total-cost {
+        font-size: 1.5rem;
+        color: #d9534f; /* Red color for total cost */
+    }
+
+    .confirm-btn {
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin-top: 20px;
+        padding: 12px;
+        border: none;
+        border-radius: 5px;
+        background-color: #28a745; /* Green color for button */
+        color: white;
+        font-size: 1.2rem;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+
+    .confirm-btn:hover {
+        background-color: #218838; /* Darker green on hover */
+    }
+
+    .submit-btn {
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 12px;
+        border: none;
+        border-radius: 5px;
+        background-color: #007bff; /* Blue color for confirm button */
+        color: white;
+        font-size: 1.2rem;
+        transition: background-color 0.3s ease;
+    }
+
+    .submit-btn:hover {
+        background-color: #0056b3; /* Darker blue on hover */
+    }
+</style>
+
+<div class="checkout-container">
+    <h2>Checkout Details</h2>
+    <div class="card">
+        <div class="card-body">
+            <h3 class="card-title">{{ property.title }}</h3>
+            <p class="price">Price: ${{ price|floatformat:2 }}</p>
+            <p class="stamp-duty">Stamp Duty: ${{ stamp_duty|floatformat:2 }}</p>
+            <p class="admin-fee">Admin Fee: ${{ admin_fee|floatformat:2 }}</p>
+            <hr>
+            <p class="total-cost">Total Cost: ${{ total_cost|floatformat:2 }}</p>
+
+            <!-- Button to proceed with payment, link to payment gateway or next step -->
+            <form method="POST" action="{% url 'confirm_payment' property.id %}">
+                {% csrf_token %}
+                <button type="submit" class="submit-btn">Confirm Payment</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to RealEstate</title>
+    {% load static %}
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/home_style.css' %}">
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container text-center">
+            <h1>Welcome to RealEstate</h1>
+            <p>Find your dream property with ease!</p>
+            <div class="buttons">
+                <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
+                <a href="{% url 'register' %}" class="btn btn-secondary">Register</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Messages Section -->
+    {% if messages %}
+        <div class="container mt-4">
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} text-center">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+
+    <!-- Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

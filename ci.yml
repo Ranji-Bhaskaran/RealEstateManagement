@@ -1,0 +1,53 @@
+name: Django CI Workflow
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+env:
+  PYTHON_VERSION: 3.9
+  SECRET_KEY: 'django-insecure-b07p=s+v-@1n-x+)ae==!ta_k#$fh@omq^kruy1hpjw*17-s5$'
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Python
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: |
+          echo "Installing dependencies..."
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pylint
+
+      # Step 4: Pre-build tasks (Linting)
+      - name: Run pylint on project files
+        working-directory: ${{ github.workspace }}/realestate_project
+        run: |
+          echo "Running pylint..."
+          pylint *.py
+          pylint realestate_project/*.py
+
+      # Step 5: Build tasks (Migrations and Static Collection)
+      - name: Apply migrations and collect static files
+        working-directory: ${{ github.workspace }}/realestate_project
+        run: |
+          echo "Applying migrations..."
+          python manage.py migrate
+          echo "Collecting static files..."
+          python manage.py collectstatic --noinput

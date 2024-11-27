@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .property-detail-container {
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 20px;
+        border-radius: 8px;
+        background-color: #fdfdfd;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+        color: #333;
+        text-align: center;
+    }
+
+    p {
+        font-size: 1.2rem;
+        line-height: 1.5;
+        color: #555;
+        margin-bottom: 15px;
+    }
+
+    .price {
+        font-size: 1.5rem;
+        color: #28a745; /* Green color for price */
+        font-weight: bold;
+        text-align: center;
+        border-bottom: 2px solid #28a745;
+        padding-bottom: 10px;
+    }
+
+    .estimated-returns {
+        margin-top: 30px;
+        padding: 15px;
+        border: 1px solid #28a745; /* Green border */
+        border-radius: 5px;
+        background-color: #e7f8e7; /* Light green background */
+        color: #333;
+    }
+
+    .tax-info {
+        font-size: 1rem;
+        margin-top: 10px;
+        color: #777; /* Lighter color for tax information */
+    }
+
+    .action-button {
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin-top: 20px;
+        padding: 12px;
+        border: none;
+        border-radius: 5px;
+        background-color: #007bff; /* Blue color for button */
+        color: white;
+        font-size: 1.2rem;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+
+    .action-button:hover {
+        background-color: #0056b3; /* Darker blue on hover */
+    }
+</style>
+
+<div class="property-detail-container">
+    <h2>Your Property: {{ property.title }}</h2>
+    <p class="price">Price: ${{ property.price }}</p>
+
+    <h3>Estimated Returns After Selling:</h3>
+    <div class="estimated-returns">
+        <p>Your estimated returns after deducting all taxes: ${{ estimated_returns }}</p>
+        <p class="tax-info">This includes a Capital Gains Tax of 33% and an Admin Tax of 5%.</p>
+    </div>
+
+    <a href="{% url 'property_list' %}" class="action-button">Back to Property List</a>
+</div>
+{% endblock %}

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm Deletion</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">  <!-- Adjust the path as necessary -->
+</head>
+<body>
+    <div class="container">
+        <h1>Confirm Deletion</h1>
+        <p>Are you sure you want to delete the following property?</p>
+        
+        <div class="property-details">
+            <h2>{{ property.title }}</h2>
+            <img src="{{ property.image }}" alt="{{ property.title }}" style="max-width: 300px;">
+            <p><strong>Description:</strong> {{ property.description }}</p>
+            <p><strong>Price:</strong> ${{ property.price }}</p>
+            <p><strong>Location:</strong> {{ property.location }}</p>
+        </div>
+
+        <form method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Delete Property</button>
+            <a href="{% url 'property_list' %}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+
+    <style>
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .property-details {
+            margin-bottom: 20px;
+        }
+        .btn {
+            padding: 10px 15px;
+            margin-top: 10px;
+            text-decoration: none;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn-danger {
+            background-color: #dc3545;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+        }
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+    </style>
+</body>
+</html>

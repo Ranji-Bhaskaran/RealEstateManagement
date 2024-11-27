@@ -1,0 +1,92 @@
+/* Global styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Header styles */
+header {
+    background-color: #004085; /* Dark blue */
+    color: #fff;
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Navbar styles */
+.navbar {
+    padding: 10px 0; /* Reduce padding for navbar */
+}
+
+.navbar-brand {
+    font-size: 1.75rem; /* Larger logo font size */
+    font-weight: bold; /* Bold logo */
+}
+
+/* Navigation link styles */
+.navbar-nav .nav-item .nav-link {
+    color: white;
+    padding: 10px 15px; /* Increase padding for better touch target */
+    font-size: 16px;
+    font-weight: 500;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Add transition for color */
+    border-radius: 5px;
+}
+
+.navbar-nav .nav-item .nav-link:hover {
+    background-color: #003d66; /* Darker blue on hover */
+    color: #fff; /* Keep text color white on hover */
+}
+
+/* Main content styles */
+main {
+    padding: 20px;
+    max-width: 1200px; /* Set maximum width for content */
+    margin: 20px auto;
+    background-color: #fff; /* White background for main content */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    border-radius: 10px; /* Rounded corners */
+}
+
+/* Footer styles */
+footer {
+    background-color: #004085; /* Dark blue footer */
+    color: white;
+    text-align: center;
+    padding: 20px 0; /* Padding for footer */
+    margin-top: 30px;
+}
+
+footer p {
+    font-size: 14px; /* Font size for footer text */
+    letter-spacing: 1px; /* Space between letters */
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+    .navbar-brand {
+        font-size: 1.5rem; /* Smaller brand font size on mobile */
+    }
+
+    .navbar-nav .nav-item .nav-link {
+        margin: 0 5px; /* Reduce margin for smaller screens */
+        font-size: 14px; /* Smaller font size on mobile */
+    }
+
+    main {
+        padding: 10px; /* Less padding on mobile */
+    }
+
+    footer p {
+        font-size: 12px; /* Smaller footer text on mobile */
+    }
+}

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Notifications</h2>
+
+    {% if notifications %}
+        <form method="post" action="{% url 'notifications' %}" class="mb-3">
+            {% csrf_token %}
+            <button type="submit" name="mark_as_read" class="btn btn-primary">Mark all as read</button>
+        </form>
+
+        <ul class="list-group">
+            {% for notification in notifications %}
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div>
+                        <strong>{{ notification.message }}</strong>
+                        <p class="mb-0 text-muted">{{ notification.timestamp }}</p>
+                    </div>
+                    <div>
+                        <form method="get" action="{% url 'property_detail' notification.property_id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-sm btn-outline-secondary">View Property</button>
+                        </form>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <div class="alert alert-info" role="alert">
+            No new notifications.
+        </div>
+    {% endif %}
+</div>
+
+{% endblock %}

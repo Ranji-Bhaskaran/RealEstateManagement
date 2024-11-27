@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    body {
+        background-color: #f9f9f9; /* Light background color for better contrast */
+    }
+
+    .container {
+        max-width: 800px; /* Limiting the width for better readability */
+        margin: auto;
+        padding: 20px;
+    }
+
+    .card {
+        border: none; /* No border for a clean look */
+        border-radius: 12px; /* Rounded corners */
+        overflow: hidden; /* Rounded corners on image */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    }
+
+    .card-img-top {
+        height: 400px; /* Fixed height for images */
+        object-fit: cover; /* Maintain aspect ratio */
+        border-bottom: 2px solid #007bff; /* Blue bottom border */
+    }
+
+    .card-title {
+        font-size: 1.75rem; /* Larger title size */
+        color: #007bff; /* Blue color for titles */
+        margin-bottom: 15px; /* Space below title */
+    }
+
+    .card-text {
+        font-size: 1rem; /* Standard text size */
+        color: #333; /* Darker text for better readability */
+        margin-bottom: 10px; /* Space between text blocks */
+    }
+
+    .btn {
+        border-radius: 20px; /* Rounded buttons */
+        padding: 10px 20px; /* Padding for buttons */
+        transition: background-color 0.3s ease; /* Smooth background color transition */
+    }
+
+    .btn-primary {
+        background-color: #007bff; /* Blue background */
+        color: white;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3; /* Darker blue on hover */
+    }
+
+    .btn-danger {
+        background-color: #dc3545; /* Red background */
+        color: white;
+    }
+
+    .btn-danger:hover {
+        background-color: #c82333; /* Darker red on hover */
+    }
+
+    .btn-warning {
+        background-color: #ffc107; /* Yellow background */
+        color: black;
+    }
+
+    .btn-warning:hover {
+        background-color: #e0a800; /* Darker yellow on hover */
+    }
+
+    .alert {
+        margin-top: 20px; /* Space above alert */
+        padding: 10px; /* Padding for alerts */
+        border-radius: 5px; /* Rounded corners for alerts */
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .container {
+            padding: 10px; /* Reduced padding for smaller screens */
+        }
+
+        .card-title {
+            font-size: 1.5rem; /* Slightly smaller title size */
+        }
+    }
+</style>
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-12"> <!-- Full width on medium screens and above -->
+            <div class="card mb-4 shadow-sm">
+                <img src="{{ property.image }}" alt="{{ property.title }}" class="card-img-top">
+                <div class="card-body">
+                    <h2 class="card-title">{{ property.title }}</h2>
+                    <p class="card-text">{{ property.description }}</p>
+                    <p class="card-text"><strong>Price:</strong> ${{ property.price }}</p>
+                    <p class="card-text"><strong>Location:</strong> {{ property.location }}</p>
+
+                    {% if user.is_authenticated %}
+                        {% if is_favorited %}
+                            <a href="{% url 'remove_favorite' property.id %}" class="btn btn-danger">Remove from Favorites</a>
+                        {% else %}
+                            <a href="{% url 'add_favorite' property.id %}" class="btn btn-primary">Add to Favorites</a>
+                        {% endif %}
+
+                        <!-- Update button visible only to the property owner -->
+                        {% if property.owner.id == user.id %}
+                            <a href="{% url 'update_property' property.id %}" class="btn btn-warning">Update Listing</a>
+                            <form action="{% url 'delete_property' property.id %}" method="post" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this listing?');">
+                                    Delete Listing
+                                </button>
+                            </form>
+                        {% endif %}
+                        {% if property.owner.id != user.id %}
+                            <a href="{% url 'checkout' property.id %}" class="btn btn-success">Proceed to Buy</a>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
