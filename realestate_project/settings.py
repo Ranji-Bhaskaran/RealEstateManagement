@@ -34,12 +34,12 @@ ADMIN_PHONE_NUMBER = 'whatsapp:+353894828263'
 
 ALLOWED_HOSTS = [
    'x23271957Realestate-env.eba-24qzt9hy.us-east-1.elasticbeanstalk.com',
-   '172.31.32.239', '172.0.0.1'
+   '172.31.42.137', '172.0.0.1'
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     'https://x23271957Realestate-env.eba-24qzt9hy.us-east-1.elasticbeanstalk.com',
-    'https://172.31.32.239', 'https://172.0.0.1']
+    'https://172.31.42.137','http://172.31.42.137', 'https://172.0.0.1']
 
 # Application definition
 INSTALLED_APPS = [
