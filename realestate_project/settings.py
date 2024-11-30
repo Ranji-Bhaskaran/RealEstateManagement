@@ -34,12 +34,14 @@ ADMIN_PHONE_NUMBER = 'whatsapp:+353894828263'
 
 ALLOWED_HOSTS = [
    'x23271957Realestate-env.eba-24qzt9hy.us-east-1.elasticbeanstalk.com',
-   '172.31.27.25', '172.0.0.1','eb0dc23843644b91aad645c885e5eb52.vfs.cloud9.us-east-1.amazonaws.com'
+   '172.31.27.25', '172.0.0.1',
+   'eb0dc23843644b91aad645c885e5eb52.vfs.cloud9.us-east-1.amazonaws.com'
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     'https://x23271957Realestate-env.eba-24qzt9hy.us-east-1.elasticbeanstalk.com',
-    'https://172.31.27.25','http://172.31.27.25', 'https://172.0.0.1','https://eb0dc23843644b91aad645c885e5eb52.vfs.cloud9.us-east-1.amazonaws.com']
+    'https://172.31.27.25','http://172.31.27.25', 'https://172.0.0.1',
+    'https://eb0dc23843644b91aad645c885e5eb52.vfs.cloud9.us-east-1.amazonaws.com']
 
 # Application definition
 INSTALLED_APPS = [
