@@ -20,11 +20,12 @@
         border-radius: 12px;
         overflow: hidden;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
+        position: relative;
     }
 
     .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        transform: translateY(-10px) scale(1.05); /* Slightly scale and lift the card */
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); /* Stronger shadow for popping effect */
     }
 
     .card-img-top {
@@ -32,12 +33,18 @@
         height: 250px; /* Taller image for more impact */
         object-fit: cover;
         border-bottom: 4px solid #28a745; /* Green accent for the bottom border */
+        transition: transform 0.3s ease;
+    }
+
+    .card:hover .card-img-top {
+        transform: scale(1.1); /* Slight zoom effect on the image */
     }
 
     .card-body {
         padding: 20px;
         text-align: center;
         background-color: #f9f9f9; /* Light background for the card body */
+        border-radius: 0 0 12px 12px;
     }
 
     .card-title {

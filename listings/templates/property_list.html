@@ -1,184 +1,13 @@
 {% extends 'base.html' %}
+
 {% block content %}
-<style>
-    body {
-        background-color: #f0f4f8; /* Soft background color */
-    }
-
-    .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 20px;
-    }
-
-    h2 {
-        text-align: center;
-        font-size: 2rem;
-        color: #343a40; /* Darker text color for better contrast */
-        margin-bottom: 30px;
-        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    }
-
-    /* Hamburger Menu Style */
-    .hamburger {
-        font-size: 1.5rem;
-        cursor: pointer;
-        border: none;
-        background: transparent;
-        outline: none;
-        color: #007bff;
-        margin-bottom: 20px;
-        position: relative;
-        z-index: 1001; /* Ensure it's above other elements */
-    }
-
-    /* Filter Bar */
-    .filter-bar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 300px; /* Wider filter bar for better usability */
-        background-color: #ffffff; /* White background for contrast */
-        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
-        padding: 20px;
-        overflow-y: auto;
-        transform: translateX(-100%);
-        transition: transform 0.4s ease;
-        z-index: 1000;
-    }
-
-    .filter-bar.active {
-        transform: translateX(0);
-    }
-
-    .filter-header {
-        font-size: 1.5rem;
-        font-weight: bold;
-        margin-bottom: 20px;
-        color: #343a40; /* Darker color for the header */
-    }
-
-    .input-group {
-        margin-bottom: 20px;
-    }
-
-    .input-label {
-        font-weight: bold;
-        margin-bottom: 5px;
-        color: #343a40; /* Darker text for labels */
-    }
-
-    .card {
-        border: none; /* No border for a cleaner look */
-        border-radius: 12px;
-        overflow: hidden;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        background-color: #ffffff; /* White background for cards */
-    }
-
-    .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow effect on hover */
-    }
-
-    .card-img-top {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-    }
-
-    .card-body {
-        padding: 15px;
-        text-align: center;
-    }
-
-    .card-title {
-        margin-bottom: 15px;
-        font-size: 1.5rem; /* Larger title */
-        color: #007bff; /* Blue color for titles */
-    }
-
-    .filter-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.4);
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.4s ease;
-        z-index: 999;
-    }
-
-    .filter-overlay.active {
-        opacity: 1;
-        visibility: visible;
-    }
-
-    .euro-button {
-        display: inline-block;
-        background-color: transparent;
-        border: none;
-        cursor: pointer;
-        position: relative;
-        padding: 0;
-        transition: transform 0.3s ease;
-    }
-
-    .euro-button:hover {
-        transform: scale(1.3); /* Scale up on hover */
-    }
-
-    .euro-symbol {
-        font-size: 1.5rem;
-        color: #28a745; /* Green color for Euro symbol */
-        transition: color 0.3s ease; /* Smooth color transition */
-    }
-
-    .euro-button:hover .euro-symbol {
-        color: #218838; /* Darker green on hover */
-    }
-
-    .action-buttons {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 10px; /* Space between buttons */
-    }
-
-    /* Button Styles */
-    .btn-primary {
-        background-color: #007bff; /* Blue */
-        border: none;
-        color: white;
-    }
-
-    .btn-secondary {
-        background-color: #6c757d; /* Gray */
-        border: none;
-        color: white;
-    }
-
-    .btn-danger {
-        background-color: #dc3545; /* Red */
-        border: none;
-        color: white;
-    }
-
-    .btn:hover {
-        opacity: 0.9; /* Slightly transparent on hover */
-    }
-</style>
-
 <div class="container">
     <h2>Properties</h2>
-    
-    <!-- Hamburger Filter Button -->
-    <button class="hamburger col-md-12" onclick="toggleFilter()">☰ Filter</button>
 
-    <!-- Filter Sidebar -->
+    <div class="d-flex justify-content-center mt-4">
+        <button class="hamburger" onclick="toggleFilter()">☰ Filter</button>
+    </div>
+
     <div id="filterBar" class="filter-bar">
         <div class="filter-header">Filter Properties</div>
         <form method="GET" action="{% url 'property_list' %}">
@@ -194,19 +23,13 @@
                 <label class="input-label"><strong>Max Price</strong></label>
                 <input type="number" name="max_price" value="{{ max_price|default_if_none:'' }}" placeholder="Max price" class="form-control" />
             </div>
-            <div class="input-group">
-                <label class="input-label"><strong>Description</strong></label>
-                <input type="text" name="description" value="{{ description_query|default_if_none:'' }}" placeholder="Filter by description" class="form-control" />
-            </div>
             <button type="submit" class="btn btn-primary">Filter</button>
             <a href="{% url 'property_list' %}" class="btn btn-secondary">Clear Filters</a>
         </form>
     </div>
 
-    <!-- Overlay for Filter Sidebar -->
     <div id="filterOverlay" class="filter-overlay" onclick="toggleFilter()"></div>
 
-    <!-- Properties Grid -->
     <div class="row mt-4">
         {% for property in properties %}
         <div class="col-md-4">
@@ -216,7 +39,7 @@
                     <h5 class="card-title">
                         <a href="{% url 'property_detail' property.id %}">{{ property.title }}</a>
                     </h5>
-                    <p> Price: ${{ property.price }} </p>
+                    <p>Price: ${{ property.price }}</p>
                     <div class="action-buttons">
                         {% if property.id in favorite_property_ids %}
                             <a href="{% url 'remove_favorite' property.id %}" class="btn btn-danger btn-sm">Remove from Favorites</a>
@@ -233,7 +56,7 @@
             </div>
         </div>
         {% empty %}
-            <p>No properties found.</p>
+        <p>No properties found.</p>
         {% endfor %}
     </div>
 </div>
@@ -246,4 +69,166 @@
         filterOverlay.classList.toggle('active');
     }
 </script>
+
+<style>
+    body {
+        background: linear-gradient(135deg, #f8f9fa, #ecf0f1);
+        font-family: 'Roboto', sans-serif;
+        color: #2f3640;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    h2 {
+        font-family: 'Poppins', sans-serif;
+        font-size: 2.5rem;
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        position: relative;
+    }
+
+    h2::after {
+        content: '';
+        width: 50px;
+        height: 4px;
+        background-color: #f1c40f;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: -10px;
+        border-radius: 5px;
+    }
+
+    .hamburger {
+        font-size: 1.5rem;
+        cursor: pointer;
+        border: none;
+        background: transparent;
+        outline: none;
+        color: #007bff;
+        margin-bottom: 20px;
+        position: relative;
+        z-index: 1001;
+    }
+
+    .filter-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 300px;
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        border-right: 2px solid #16a085;
+        backdrop-filter: blur(10px);
+        border-radius: 0 10px 10px 0;
+        padding: 20px;
+        overflow-y: auto;
+        transform: translateX(-100%);
+        transition: transform 0.4s ease, visibility 0.4s ease;
+        visibility: hidden;
+        z-index: 1000;
+    }
+
+    .filter-bar.active {
+        transform: translateX(0);
+        visibility: visible;
+    }
+
+    .filter-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.4);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.4s ease, visibility 0.4s ease;
+        z-index: 999;
+    }
+
+    .filter-overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .card {
+        border: 2px solid #16a085;
+        border-radius: 15px;
+        background: #ffffff;
+        transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        height: 100%;
+    }
+
+    .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        border-color: #f1c40f;
+    }
+
+    .card-img-top {
+        border-bottom: 3px solid #16a085;
+        transition: transform 0.3s ease;
+        height: 250px;
+        object-fit: cover;
+    }
+
+    .card:hover .card-img-top {
+        transform: scale(1.1);
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #16a085, #1abc9c);
+        border: none;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 25px;
+        transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn-primary:hover {
+        background: #16a085;
+        transform: scale(1.1);
+    }
+
+    .btn-danger {
+        background: linear-gradient(135deg, #e74c3c, #c0392b);
+        border: none;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 25px;
+        transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn-danger:hover {
+        background: #e74c3c;
+        transform: scale(1.1);
+    }
+
+    .euro-symbol {
+        font-size: 1.8rem;
+        color: #f1c40f;
+        transition: color 0.3s ease;
+    }
+
+    .euro-button:hover .euro-symbol {
+        color: #e67e22;
+    }
+
+    .d-flex {
+        display: flex;
+        justify-content: center;
+    }
+
+    .mt-4 {
+        margin-top: 20px;
+    }
+</style>
 {% endblock %}

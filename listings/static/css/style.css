@@ -3,90 +3,127 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 body {
-    background-color: #f4f4f4;
-    color: #333;
+    background: linear-gradient(to right, #f8f9fa, #ecf0f1, #ffffff);
+    color: #2f3640;
     line-height: 1.6;
 }
 
-/* Header styles */
+/* Header */
 header {
-    background-color: #004085; /* Dark blue */
-    color: #fff;
-    padding: 20px 0;
+    background: linear-gradient(to right, #16a085, #1abc9c);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     position: sticky;
     top: 0;
     z-index: 1000;
 }
 
-/* Navbar styles */
 .navbar {
-    padding: 10px 0; /* Reduce padding for navbar */
+    padding: 15px 0;
 }
 
 .navbar-brand {
-    font-size: 1.75rem; /* Larger logo font size */
-    font-weight: bold; /* Bold logo */
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
 }
 
-/* Navigation link styles */
-.navbar-nav .nav-item .nav-link {
-    color: white;
-    padding: 10px 15px; /* Increase padding for better touch target */
-    font-size: 16px;
-    font-weight: 500;
-    transition: background-color 0.3s ease, color 0.3s ease; /* Add transition for color */
-    border-radius: 5px;
+.navbar-brand:hover {
+    color: #f1c40f;
 }
 
-.navbar-nav .nav-item .nav-link:hover {
-    background-color: #003d66; /* Darker blue on hover */
-    color: #fff; /* Keep text color white on hover */
+.navbar-nav .nav-link {
+    color: #ffffff;
+    padding: 10px 20px;
+    font-size: 1rem;
+    text-transform: uppercase;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Main content styles */
+.navbar-nav .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #f1c40f;
+}
+
+/* Main Content */
 main {
-    padding: 20px;
-    max-width: 1200px; /* Set maximum width for content */
+    background: linear-gradient(to right, #e9f7f6, #d1e7e3); /* Subtle gradient fading from left to right */
+    padding: 30px;
+    max-width: 1200px;
     margin: 20px auto;
-    background-color: #fff; /* White background for main content */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    transition: transform 0.3s ease;
 }
 
-/* Footer styles */
+main:hover {
+    transform: translateY(-5px);
+}
+
+/* Footer */
 footer {
-    background-color: #004085; /* Dark blue footer */
+    background: linear-gradient(to right, #16a085, #1abc9c);
+    color: #ffffff;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    padding: 20px 0;
+}
+
+/* Buttons */
+.btn {
+    padding: 10px 15px;
+    font-size: 1rem;
+    text-transform: uppercase;
+    border-radius: 25px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #16a085, #1abc9c);
     color: white;
-    text-align: center;
-    padding: 20px 0; /* Padding for footer */
-    margin-top: 30px;
 }
 
-footer p {
-    font-size: 14px; /* Font size for footer text */
-    letter-spacing: 1px; /* Space between letters */
+.btn-primary:hover {
+    background: #16a085;
+    transform: scale(1.1);
 }
 
-/* Responsive styling */
+.btn-secondary {
+    background: #6c757d;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #5a6268;
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
     .navbar-brand {
-        font-size: 1.5rem; /* Smaller brand font size on mobile */
+        font-size: 1.5rem;
     }
 
-    .navbar-nav .nav-item .nav-link {
-        margin: 0 5px; /* Reduce margin for smaller screens */
-        font-size: 14px; /* Smaller font size on mobile */
+    .nav-link {
+        font-size: 0.875rem;
+        padding: 8px 12px;
     }
 
     main {
-        padding: 10px; /* Less padding on mobile */
+        padding: 20px;
+        box-shadow: none;
     }
 
-    footer p {
-        font-size: 12px; /* Smaller footer text on mobile */
+    footer {
+        font-size: 0.8rem;
     }
 }
